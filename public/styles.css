@@ -488,3 +488,72 @@ body.dark .custom-card input {
   margin-top: 15px;
 }
 
+/* SMART DASHBOARD */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 25px 0 35px;
+}
+
+.dashboard-card {
+  text-align: center;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+.dashboard-icon {
+  font-size: 28px;
+}
+
+.dashboard-card h3 {
+  font-size: 34px;
+  margin: 8px 0 0;
+}
+
+.dashboard-card p {
+  margin: 4px 0 0;
+  font-weight: 600;
+}
+
+/* dashboard themes */
+
+body.default .dashboard-card {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+body.green .dashboard-card {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+body.pink .dashboard-card {
+  background: #ffe4e6;
+  border-color: #fda4af;
+}
+
+body.blue .dashboard-card {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+body.sunset .dashboard-card {
+  background: #ffedd5;
+  border-color: #fdba74;
+}
+
+body.dark .dashboard-card {
+  background: #374151;
+  border-color: #c7d2fe;
+}
+
+@media (max-width: 700px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

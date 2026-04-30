@@ -7,7 +7,6 @@
 
 <body class="default">
 
-  <!-- SETTINGS -->
   <div class="settings-menu">
     <button id="settingsBtn" type="button">⚙</button>
 
@@ -29,20 +28,65 @@
     <h1>StudySprint</h1>
     <p>Your student task tracker and study motivation dashboard.</p>
 
-    <!-- NAV -->
     <div class="nav">
       <a href="/addTask">Add Task</a>
       <a href="/tasks">View Tasks</a>
       <a href="/motivation">Motivation</a>
       <a href="/focusMusic">Focus Music</a>
-      <a href="/pomodoro">Pomodoro Method</a>
+      <a href="/pomodoro">Sprint Timer</a>
     </div>
+
+    <%
+      const todayDashboard = new Date();
+      todayDashboard.setHours(0, 0, 0, 0);
+
+      let dueTodayCount = 0;
+      let dueThisWeekCount = 0;
+      let totalHours = 0;
+
+      tasks.forEach(task => {
+        const dateParts = task.dueDate.split("-");
+        const taskDueDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+        taskDueDate.setHours(0, 0, 0, 0);
+
+        const daysUntilDue = Math.round((taskDueDate - todayDashboard) / (1000 * 60 * 60 * 24));
+
+        if (daysUntilDue === 0) {
+          dueTodayCount++;
+        }
+
+        if (daysUntilDue >= 0 && daysUntilDue <= 7) {
+          dueThisWeekCount++;
+        }
+
+        totalHours += Number(task.estimatedHours) || 0;
+      });
+    %>
+
+    <section class="dashboard-grid">
+      <div class="dashboard-card">
+        <span class="dashboard-icon">📅</span>
+        <h3><%= dueTodayCount %></h3>
+        <p>Due Today</p>
+      </div>
+
+      <div class="dashboard-card">
+        <span class="dashboard-icon">⏳</span>
+        <h3><%= dueThisWeekCount %></h3>
+        <p>Due This Week</p>
+      </div>
+
+      <div class="dashboard-card">
+        <span class="dashboard-icon">🧠</span>
+        <h3><%= totalHours %></h3>
+        <p>Estimated Hours</p>
+      </div>
+    </section>
 
     <h2>Upcoming Tasks</h2>
 
     <% if (tasks.length === 0) { %>
       <p>No tasks yet. Add your first assignment!</p>
-
     <% } else { %>
 
       <% tasks.forEach(task => { %>
@@ -70,7 +114,7 @@
 
           <p><strong>Class:</strong> <%= task.className %></p>
 
-          <p><strong>Due:</strong> 
+          <p><strong>Due:</strong>
             <%= due.toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -89,6 +133,5 @@
   </main>
 
   <script src="/theme.js"></script>
-
 </body>
 </html>
