@@ -51,10 +51,6 @@ router.post("/addTask", async (req, res) => {
   res.redirect("/");
 });
 
-router.get("/tasks", async (req, res) => {
-  const tasks = await Task.find().sort({ dueDate: 1 });
-  res.render("tasks", { tasks });
-});
 
 router.post("/toggleComplete", async (req, res) => {
   const task = await Task.findById(req.body.id);

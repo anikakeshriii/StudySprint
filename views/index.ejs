@@ -29,7 +29,6 @@
 
     <div class="nav">
       <a href="/addTask">Add Task</a>
-      <a href="/tasks">View Tasks</a>
       <a href="/motivation">Motivation</a>
       <a href="/focusMusic">Focus Music</a>
       <a href="/pomodoro">Sprint Timer</a>
@@ -116,11 +115,25 @@
           due.setHours(0, 0, 0, 0);
 
           const diffDays = Math.round((due - today) / (1000 * 60 * 60 * 24));
+
+          let dueMessage = "";
+
+          if (diffDays < 0) {
+            dueMessage = `Overdue by ${Math.abs(diffDays)} day${Math.abs(diffDays) === 1 ? "" : "s"}`;
+          } else if (diffDays === 0) {
+            dueMessage = "Due today";
+          } else if (diffDays === 1) {
+            dueMessage = "Due tomorrow";
+          } else {
+            dueMessage = `Due in ${diffDays} days`;
+          }
         %>
 
         <div class="card <%= task.completed ? 'completed-task' : '' %>">
 
-          <% if (diffDays === 0) { %>
+          <% if (diffDays < 0) { %>
+            <span class="badge due-overdue">❌ Overdue</span>
+          <% } else if (diffDays === 0) { %>
             <span class="badge due-today">🚨 Due Today</span>
           <% } else if (diffDays === 1) { %>
             <span class="badge due-tomorrow">⚠ Due Tomorrow</span>
@@ -138,7 +151,8 @@
             }) %>
           </p>
 
-          <p><strong>Priority:</strong> <%= task.priority %></p>
+          <p class="due-message"><strong><%= dueMessage %></strong></p>
+
           <p><strong>Estimated Hours:</strong> <%= task.estimatedHours %></p>
 
           <div class="task-actions">

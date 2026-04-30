@@ -668,6 +668,16 @@ body.dark .progress-bar {
   color: white;
 }
 
+.due-overdue {
+  background: #991b1b;
+  color: white;
+}
+
+.due-message {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
 /* Theme-safe complete button */
 body.default .complete-btn { background: #4f46e5; color: white; }
 body.green .complete-btn { background: #059669; color: white; }
