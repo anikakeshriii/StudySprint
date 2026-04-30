@@ -24,7 +24,6 @@
   </div>
 
   <main class="container">
-
     <h1>StudySprint</h1>
     <p>Your student task tracker and study motivation dashboard.</p>
 
@@ -43,6 +42,7 @@
       let dueTodayCount = 0;
       let dueThisWeekCount = 0;
       let totalHours = 0;
+      let completedCount = 0;
 
       tasks.forEach(task => {
         const dateParts = task.dueDate.split("-");
@@ -60,7 +60,15 @@
         }
 
         totalHours += Number(task.estimatedHours) || 0;
+
+        if (task.completed) {
+          completedCount++;
+        }
       });
+
+      const progressPercent = tasks.length === 0
+        ? 0
+        : Math.round((completedCount / tasks.length) * 100);
     %>
 
     <section class="dashboard-grid">
@@ -80,6 +88,14 @@
         <span class="dashboard-icon">🧠</span>
         <h3><%= totalHours %></h3>
         <p>Estimated Hours</p>
+      </div>
+
+      <div class="completion-section">
+        <p><strong>Progress: <%= progressPercent %>% completed</strong></p>
+
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: <%= progressPercent + '%' %>"></div>
+        </div>
       </div>
     </section>
 
@@ -102,7 +118,7 @@
           const diffDays = Math.round((due - today) / (1000 * 60 * 60 * 24));
         %>
 
-        <div class="card">
+        <div class="card <%= task.completed ? 'completed-task' : '' %>">
 
           <% if (diffDays === 0) { %>
             <span class="badge due-today">🚨 Due Today</span>
@@ -123,13 +139,33 @@
           </p>
 
           <p><strong>Priority:</strong> <%= task.priority %></p>
+          <p><strong>Estimated Hours:</strong> <%= task.estimatedHours %></p>
+
+          <div class="task-actions">
+            <form action="/toggleComplete" method="POST">
+              <input type="hidden" name="id" value="<%= task._id %>">
+
+              <% if (task.completed) { %>
+                <button type="submit" class="complete-btn">Mark Incomplete</button>
+              <% } else { %>
+                <button type="submit" class="complete-btn">Mark Complete</button>
+              <% } %>
+            </form>
+
+            <form action="/deleteTask" method="POST">
+              <input type="hidden" name="id" value="<%= task._id %>">
+
+              <button type="submit" class="delete-btn" onclick="return confirm('Delete this task?')">
+                Delete
+              </button>
+            </form>
+          </div>
 
         </div>
 
       <% }) %>
 
     <% } %>
-
   </main>
 
   <script src="/theme.js"></script>

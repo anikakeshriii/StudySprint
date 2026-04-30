@@ -557,3 +557,121 @@ body.dark .dashboard-card {
   }
 }
 
+/* PROGRESS BAR */
+
+.completion-section {
+  grid-column: 1 / -1; /* span full grid width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.completion-section p {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.progress-bar {
+  width: 60%;
+  max-width: 500px;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Progress fill theme colors */
+body.default .progress-fill {
+  background: #4f46e5;
+}
+
+body.green .progress-fill {
+  background: #059669;
+}
+
+body.pink .progress-fill {
+  background: #e11d48;
+}
+
+body.blue .progress-fill {
+  background: #2563eb;
+}
+
+body.sunset .progress-fill {
+  background: #ea580c;
+}
+
+body.dark .progress-fill {
+  background: #c7d2fe;
+}
+
+/* Progress bar backgrounds per theme */
+
+body.default .progress-bar {
+  background: #e0e7ff;
+  border-color: #c7d2fe;
+}
+
+body.green .progress-bar {
+  background: #bbf7d0;
+  border-color: #86efac;
+}
+
+body.pink .progress-bar {
+  background: #fecdd3;
+  border-color: #fda4af;
+}
+
+body.blue .progress-bar {
+  background: #bfdbfe;
+  border-color: #93c5fd;
+}
+
+body.sunset .progress-bar {
+  background: #fed7aa;
+  border-color: #fdba74;
+}
+
+body.dark .progress-bar {
+  background: #4b5563;
+  border-color: #c7d2fe;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Complete button */
+.complete-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Delete button */
+.delete-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #ef4444;
+  color: white;
+}
+
+/* Theme-safe complete button */
+body.default .complete-btn { background: #4f46e5; color: white; }
+body.green .complete-btn { background: #059669; color: white; }
+body.pink .complete-btn { background: #e11d48; color: white; }
+body.blue .complete-btn { background: #2563eb; color: white; }
+body.sunset .complete-btn { background: #ea580c; color: white; }
+body.dark .complete-btn { background: #6366f1; color: white; }
