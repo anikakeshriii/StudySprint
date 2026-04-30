@@ -1,0 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* BASE */
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7fb;
+  color: #1f2937;
+}
+
+.container {
+  width: 85%;
+  max-width: 900px;
+  margin: 60px auto;
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+
+h1 { font-size: 40px; }
+h2 { font-size: 26px; }
+h3 { margin-top: 0; }
+p { line-height: 1.5; }
+
+/* NAV */
+
+.nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+
+.nav a,
+a {
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: white;
+}
+
+/* CARDS */
+
+.card {
+  position: relative;
+  padding: 18px;
+  border-radius: 14px;
+  margin: 15px 0;
+  border: 1px solid;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+/* BADGES */
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.due-today {
+  background: #ef4444;
+  color: white;
+}
+
+.due-tomorrow {
+  background: #facc15;
+  color: #713f12;
+}
+
+/* FORMS */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input,
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #c7d2fe;
+  font-size: 16px;
+}
+
+/* BUTTONS */
+
+button {
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.button-group button,
+.button-group a {
+  flex: 1;
+  text-align: center;
+}
+
+.secondary-btn {
+  background: #6b7280;
+}
+
+/* SETTINGS */
+
+.settings-menu {
+  position: fixed;
+  top: 60px;
+  right: 35px;
+  z-index: 999;
+  padding-bottom: 120px;
+}
+
+#settingsBtn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 24px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.15);
+}
+
+/* DROPDOWN */
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  min-width: 210px;
+  background: white;
+  color: #1f2937;
+  padding: 18px;
+  border-radius: 14px;
+  border: 2px solid #4f46e5;
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+}
+
+.settings-menu:hover .dropdown {
+  display: block;
+}
+
+.dropdown label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dropdown select {
+  width: 100%;
+  background: white;
+  color: #111827;
+  border: 2px solid #4f46e5;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+/* THEMES */
+
+/* DEFAULT */
+body.default {
+  background: #f4f7fb;
+  color: #1f2937;
+}
+
+body.default h1 {
+  color: #4f46e5;
+}
+
+body.default a,
+body.default button,
+body.default #settingsBtn {
+  background: #4f46e5;
+}
+
+body.default .card {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+/* GREEN */
+body.green {
+  background: #f0fdf4;
+  color: #064e3b;
+}
+
+body.green h1 {
+  color: #047857;
+}
+
+body.green .container {
+  background: white;
+}
+
+body.green .card {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+body.green a,
+body.green button,
+body.green #settingsBtn {
+  background: #059669;
+}
+
+body.green .dropdown,
+body.green .dropdown select {
+  border-color: #059669;
+}
+
+/* PINK */
+body.pink {
+  background: #fff7f9;
+  color: #881337;
+}
+
+body.pink h1 {
+  color: #be123c;
+}
+
+body.pink .container {
+  background: white;
+}
+
+body.pink .card {
+  background: #ffe4e6;
+  border-color: #fda4af;
+}
+
+body.pink a,
+body.pink button,
+body.pink #settingsBtn {
+  background: #e11d48;
+}
+
+body.pink .dropdown,
+body.pink .dropdown select {
+  border-color: #e11d48;
+}
+
+/* BLUE */
+body.blue {
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+body.blue h1 {
+  color: #1d4ed8;
+}
+
+body.blue .container {
+  background: white;
+}
+
+body.blue .card {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+body.blue a,
+body.blue button,
+body.blue #settingsBtn {
+  background: #2563eb;
+}
+
+body.blue .dropdown,
+body.blue .dropdown select {
+  border-color: #2563eb;
+}
+
+/* SUNSET */
+body.sunset {
+  background: #fff7ed;
+  color: #7c2d12;
+}
+
+body.sunset h1 {
+  color: #c2410c;
+}
+
+body.sunset .container {
+  background: white;
+}
+
+body.sunset .card {
+  background: #fed7aa;
+  border-color: #fdba74;
+}
+
+body.sunset a,
+body.sunset button,
+body.sunset #settingsBtn {
+  background: #ea580c;
+}
+
+body.sunset .dropdown,
+body.sunset .dropdown select {
+  border-color: #ea580c;
+}
+
+/* DARK */
+body.dark {
+  background: #111827;
+  color: #f9fafb;
+}
+
+body.dark h1 {
+  color: #c7d2fe;
+}
+
+body.dark .container {
+  background: #1f2937;
+}
+
+body.dark .card {
+  background: #374151;
+  border-color: #c7d2fe;
+}
+
+body.dark a,
+body.dark button,
+body.dark #settingsBtn {
+  background: #6366f1;
+}
+
+body.dark .dropdown {
+  background: #374151;
+  color: #f9fafb;
+  border-color: #c7d2fe;
+}
+
+body.dark .dropdown label {
+  color: #f9fafb;
+}
+
+body.dark .dropdown select {
+  background: white;
+  color: #111827;
+  border-color: #c7d2fe;
+}
+
+/* POMODORO */
+
+.timer-card {
+  text-align: center;
+  padding: 35px;
+  border-radius: 22px;
+  margin: 25px 0;
+  border: 1px solid;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+.timer-display {
+  font-size: 80px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+/* TIMER COLORS */
+
+body.default .timer-card {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+body.default .timer-display {
+  color: #4f46e5;
+}
+
+body.green .timer-card {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+body.green .timer-display {
+  color: #047857;
+}
+
+body.pink .timer-card {
+  background: #ffe4e6;
+  border-color: #fda4af;
+}
+
+body.pink .timer-display {
+  color: #be123c;
+}
+
+body.blue .timer-card {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+body.blue .timer-display {
+  color: #2563eb;
+}
+
+body.sunset .timer-card {
+  background: #ffedd5;
+  border-color: #fdba74;
+}
+
+body.sunset .timer-display {
+  color: #ea580c;
+}
+
+body.dark .timer-card {
+  background: #374151;
+  border-color: #c7d2fe;
+}
+
+body.dark .timer-display {
+  color: #c7d2fe;
+}
+
+/* CUSTOM CARD */
+
+.custom-card {
+  padding: 25px;
+  border-radius: 18px;
+  margin: 25px 0;
+  border: 1px solid;
+}
+
+body.default .custom-card {
+  background: #f8fafc;
+  border-color: #e5e7eb;
+}
+
+body.green .custom-card {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+body.pink .custom-card {
+  background: #ffe4e6;
+  border-color: #fda4af;
+}
+
+body.blue .custom-card {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+body.sunset .custom-card {
+  background: #ffedd5;
+  border-color: #fdba74;
+}
+
+body.dark .custom-card {
+  background: #374151;
+  border-color: #c7d2fe;
+}
+
+body.dark .custom-card input {
+  background: white;
+  color: #111827;
+}
+
+/* INPUT LAYOUT */
+
+.input-row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-card button {
+  margin-top: 15px;
+}
+

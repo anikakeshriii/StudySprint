@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Focus Music</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="default">
+  <main class="container">
+    <h1>Focus Music</h1>
+    <p>Search for study music based on your mood, subject, or vibe.</p>
+
+    <form action="/focusMusic" method="POST">
+  <label>What kind of study music do you want?</label>
+
+  <input 
+    type="text" 
+    name="searchTerm" 
+    placeholder="lofi study, piano focus, coding music..."
+    value="<%= searchTerm %>"
+    required
+  >
+
+  <div class="button-group">
+    <button type="submit">Find Music</button>
+    <a href="/" class="secondary-btn">Back Home</a>
+  </div>
+</form>
+
+
+    <% if (tracks !== null) { %>
+      <h2>Results for "<%= searchTerm %>"</h2>
+
+      <% if (tracks.length === 0) { %>
+        <p>No tracks found. Try another search.</p>
+      <% } else { %>
+        <div class="playlist-grid">
+          <% tracks.forEach(track => { %>
+            <div class="card">
+              <% if (track.image) { %>
+                <img src="<%= track.image %>" alt="Album cover" class="playlist-img">
+              <% } %>
+
+              <h3><%= track.name %></h3>
+              <p>By <%= track.artist %></p>
+
+              <a href="<%= track.link %>" target="_blank">Open on Spotify</a>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    <% } %>
+  </main>
+
+  <script src="/theme.js"></script>
+</body>
+</html>

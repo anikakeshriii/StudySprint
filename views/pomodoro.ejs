@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sprint Timer</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body class="default">
+  <main class="container">
+    <h1>Sprint Timer</h1>
+    <p>Customize your focus session and take intentional breaks.</p>
+
+    <div class="timer-card">
+      <h2 id="modeLabel">Focus Time</h2>
+
+      <div id="timerDisplay" class="timer-display">
+        25:00
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="startBtn">Start</button>
+        <button type="button" id="pauseBtn">Pause</button>
+        <button type="button" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="custom-card">
+      <h2>Customize Sprint</h2>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label>Focus Minutes</label>
+          <input type="number" id="focusInput" value="25" min="1">
+        </div>
+
+        <div class="input-group">
+          <label>Break Minutes</label>
+          <input type="number" id="breakInput" value="5" min="1">
+        </div>
+      </div>
+
+      <button type="button" id="saveTimerBtn">
+        Save Timer Settings
+      </button>
+    </div>
+
+    <a href="/" class="secondary-btn">Back Home</a>
+  </main>
+
+  <script src="/theme.js"></script>
+  <script src="/pomodoro.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Task</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body class="default">
+  <main class="container">
+    <h1>Add a Task</h1>
+
+    <form action="/addTask" method="POST">
+      <label>Task Title</label>
+      <input type="text" name="title" required>
+
+      <label>Class Name</label>
+      <input type="text" name="className" required>
+
+      <label>Due Date</label>
+      <input type="date" name="dueDate" required>
+
+      <label>Priority</label>
+      <select name="priority">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+
+      <label>Estimated Hours</label>
+      <input type="number" name="estimatedHours" required>
+
+      <div class="button-group">
+        <button type="submit">Save Task</button>
+        <a href="/" class="secondary-btn">Back Home</a>
+      </div>
+    </form>
+  </main>
+
+  <script src="/theme.js"></script>
+</body>
+</html>
