@@ -678,6 +678,45 @@ body.dark .progress-bar {
   opacity: 0.9;
 }
 
+.task-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Make each slot equal */
+.task-actions form,
+.task-actions a {
+  flex: 1;
+}
+
+.task-actions button:hover,
+.task-actions a:hover {
+  transform: translateY(-2px);
+}
+
+/* Normalize ALL buttons */
+.task-actions button,
+.task-actions a {
+  display: block;
+  width: 100%;
+  height: 42px;              /* 👈 FORCE SAME HEIGHT */
+  line-height: 42px;         /* 👈 vertical centering */
+  text-align: center;
+
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  font-size: 16px;
+
+  padding: 0;                /* 👈 remove uneven padding */
+  box-sizing: border-box;
+}
+.edit-btn {
+  background: #6b7280;
+  color: white;
+}
+
 /* Theme-safe complete button */
 body.default .complete-btn { background: #4f46e5; color: white; }
 body.green .complete-btn { background: #059669; color: white; }

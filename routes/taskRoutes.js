@@ -123,4 +123,22 @@ router.get("/pomodoro", (req, res) => {
   res.render("pomodoro");
 });
 
+router.get("/editTask/:id", async (req, res) => {
+  const task = await Task.findById(req.params.id);
+  res.render("editTask", { task });
+});
+
+router.post("/editTask/:id", async (req, res) => {
+  const { title, className, dueDate, estimatedHours } = req.body;
+
+  await Task.findByIdAndUpdate(req.params.id, {
+    title,
+    className,
+    dueDate,
+    estimatedHours
+  });
+
+  res.redirect("/");
+});
+
 module.exports = router;

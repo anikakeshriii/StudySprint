@@ -157,23 +157,25 @@
 
           <div class="task-actions">
             <form action="/toggleComplete" method="POST">
-              <input type="hidden" name="id" value="<%= task._id %>">
+                <input type="hidden" name="id" value="<%= task._id %>">
 
-              <% if (task.completed) { %>
+                <% if (task.completed) { %>
                 <button type="submit" class="complete-btn">Mark Incomplete</button>
-              <% } else { %>
+                <% } else { %>
                 <button type="submit" class="complete-btn">Mark Complete</button>
-              <% } %>
+                <% } %>
             </form>
+
+            <a href="/editTask/<%= task._id %>" class="edit-btn">Edit</a>
 
             <form action="/deleteTask" method="POST">
-              <input type="hidden" name="id" value="<%= task._id %>">
+                <input type="hidden" name="id" value="<%= task._id %>">
 
-              <button type="submit" class="delete-btn" onclick="return confirm('Delete this task?')">
+                <button type="submit" class="delete-btn" onclick="return confirm('Delete this task?')">
                 Delete
-              </button>
+                </button>
             </form>
-          </div>
+            </div>
 
         </div>
 
