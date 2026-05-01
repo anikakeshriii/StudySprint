@@ -832,6 +832,29 @@ button:hover,
   opacity: 0.8;
 }
 
+.completed-task {
+  position: relative;
+  opacity: 0.75;
+}
+
+.completed-task::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(100, 100, 100, 0.15);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.completed-task h3 {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.completed-task p {
+  opacity: 0.8;
+}
+
 
 
 /* Theme-safe complete button */
