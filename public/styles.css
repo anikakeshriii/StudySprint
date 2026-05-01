@@ -855,6 +855,45 @@ button:hover,
   opacity: 0.8;
 }
 
+.weekly-summary {
+  margin-top: 25px;
+  padding: 18px;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Match themes */
+body.default .weekly-summary {
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+}
+
+body.green .weekly-summary {
+  background: #dcfce7;
+  border: 1px solid #86efac;
+}
+
+body.pink .weekly-summary {
+  background: #ffe4e6;
+  border: 1px solid #fda4af;
+}
+
+body.blue .weekly-summary {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+}
+
+body.sunset .weekly-summary {
+  background: #ffedd5;
+  border: 1px solid #fdba74;
+}
+
+body.dark .weekly-summary {
+  background: #374151;
+  border: 1px solid #c7d2fe;
+}
+
 
 
 /* Theme-safe complete button */

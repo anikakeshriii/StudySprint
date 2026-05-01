@@ -65,28 +65,25 @@ router.post("/toggleComplete", async (req, res) => {
 });
 
 router.get("/motivation", async (req, res) => {
-  const fallbackQuotes = [
-    { content: "Discipline beats motivation.", author: "Unknown" },
-    { content: "Small progress is still progress.", author: "Unknown" },
-    { content: "Focus on being productive, not busy.", author: "Tim Ferriss" },
-    { content: "Start where you are. Use what you have.", author: "Arthur Ashe" }
-  ];
-
   try {
-    const response = await fetch("https://api.quotable.io/quotes/random");
+    const response = await fetch("https://zenquotes.io/api/random");
     const data = await response.json();
-    const quoteData = Array.isArray(data) ? data[0] : data;
+
+    if (data[0].q === "Too many requests") {
+      throw new Error("Rate limited");
+    }
 
     res.render("motivation", {
-      quote: quoteData.content,
-      author: quoteData.author
+      quote: data[0].q,
+      author: data[0].a
     });
+
   } catch (error) {
-    const random = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+    console.log("Falling back to backup quote");
 
     res.render("motivation", {
-      quote: random.content,
-      author: random.author
+      quote: "Discipline is choosing between what you want now and what you want most.",
+      author: "Abraham Lincoln"
     });
   }
 });

@@ -43,6 +43,14 @@
       let totalHours = 0;
       let completedCount = 0;
 
+      // WEEKLY SUMMARY VARIABLES
+      let weekCompleted = 0;
+      let weekRemaining = 0;
+      let weekHours = 0;
+
+      const endOfWeek = new Date(todayDashboard);
+      endOfWeek.setDate(todayDashboard.getDate() + 7);
+
       tasks.forEach(task => {
         const dateParts = task.dueDate.split("-");
         const taskDueDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
@@ -50,18 +58,21 @@
 
         const daysUntilDue = Math.round((taskDueDate - todayDashboard) / (1000 * 60 * 60 * 24));
 
-        if (daysUntilDue === 0) {
-          dueTodayCount++;
-        }
-
-        if (daysUntilDue >= 0 && daysUntilDue <= 7) {
-          dueThisWeekCount++;
-        }
+        if (daysUntilDue === 0) dueTodayCount++;
+        if (daysUntilDue >= 0 && daysUntilDue <= 7) dueThisWeekCount++;
 
         totalHours += Number(task.estimatedHours) || 0;
 
-        if (task.completed) {
-          completedCount++;
+        if (task.completed) completedCount++;
+
+        // WEEKLY LOGIC
+        if (taskDueDate >= todayDashboard && taskDueDate <= endOfWeek) {
+          if (task.completed) {
+            weekCompleted++;
+          } else {
+            weekRemaining++;
+            weekHours += Number(task.estimatedHours) || 0;
+          }
         }
       });
 
@@ -126,6 +137,18 @@
       </div>
     </section>
 
+    <!-- 🔥 WEEKLY SUMMARY -->
+    <div class="weekly-summary">
+      <h3>This Week</h3>
+      <p>✔ <%= weekCompleted %> completed</p>
+      <p>⏳ <%= weekRemaining %> remaining</p>
+      <p>🧠 <%= weekHours %> hours left</p>
+
+      <% if (weekRemaining === 0 && weekCompleted > 0) { %>
+        <p class="celebration-message">🔥 You finished everything this week!</p>
+      <% } %>
+    </div>
+
     <h2>Upcoming Tasks</h2>
 
     <% if (activeTasks.length === 0) { %>
@@ -170,20 +193,14 @@
           <div class="task-actions">
             <form action="/toggleComplete" method="POST">
               <input type="hidden" name="id" value="<%= task._id %>">
-
-              <button type="submit" class="complete-btn">
-                Complete
-              </button>
+              <button type="submit" class="complete-btn">Complete</button>
             </form>
 
             <a href="/editTask/<%= task._id %>" class="edit-btn">Edit</a>
 
             <form action="/deleteTask" method="POST" class="delete-form">
               <input type="hidden" name="id" value="<%= task._id %>">
-
-              <button type="submit" class="delete-btn">
-                Delete
-              </button>
+              <button type="submit" class="delete-btn">Delete</button>
             </form>
           </div>
 
@@ -225,20 +242,14 @@
           <div class="task-actions">
             <form action="/toggleComplete" method="POST">
               <input type="hidden" name="id" value="<%= task._id %>">
-
-              <button type="submit" class="complete-btn">
-                Undo
-              </button>
+              <button type="submit" class="complete-btn">Undo</button>
             </form>
 
             <a href="/editTask/<%= task._id %>" class="edit-btn">Edit</a>
 
             <form action="/deleteTask" method="POST" class="delete-form">
               <input type="hidden" name="id" value="<%= task._id %>">
-
-              <button type="submit" class="delete-btn">
-                Delete
-              </button>
+              <button type="submit" class="delete-btn">Delete</button>
             </form>
           </div>
 
@@ -251,41 +262,6 @@
   </main>
 
   <script src="/theme.js"></script>
-
-  <script>
-    document.querySelectorAll(".delete-form").forEach(form => {
-      form.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const shouldDelete = confirm("Delete this task?");
-
-        if (!shouldDelete) {
-          return;
-        }
-
-        const card = form.closest(".card");
-        card.classList.add("delete-animation");
-
-        setTimeout(() => {
-          form.submit();
-        }, 350);
-      });
-    });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-    <script>
-    <% if (tasks.length > 0 && completedTasks.length === tasks.length) { %>
-        confetti({
-        particleCount: 160,
-        spread: 80,
-        origin: { y: 0.6 }
-        });
-    <% } %>
-    </script>
-
-  
 
 </body>
 </html>
