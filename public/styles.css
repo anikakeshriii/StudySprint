@@ -793,6 +793,45 @@ button:hover,
   text-decoration: none;
 }
 
+/* TASK ANIMATIONS */
+
+.card {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.card.delete-animation {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+/* COMPLETED TASK STYLE */
+
+.completed-task {
+  position: relative;
+  opacity: 0.75;
+}
+
+/* grey overlay */
+.completed-task::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(100, 100, 100, 0.15);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* line through title */
+.completed-task h3 {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+/* slightly dim text */
+.completed-task p {
+  opacity: 0.8;
+}
+
 
 
 /* Theme-safe complete button */

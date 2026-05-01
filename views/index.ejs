@@ -159,20 +159,18 @@
             <form action="/toggleComplete" method="POST">
                 <input type="hidden" name="id" value="<%= task._id %>">
 
-                <% if (task.completed) { %>
-                <button type="submit" class="complete-btn">Mark Incomplete</button>
-                <% } else { %>
-                <button type="submit" class="complete-btn">Mark Complete</button>
-                <% } %>
+                <button type="submit" class="complete-btn">
+                    <%= task.completed ? "Undo" : "Complete" %>
+                </button>
             </form>
 
             <a href="/editTask/<%= task._id %>" class="edit-btn">Edit</a>
 
-            <form action="/deleteTask" method="POST">
+            <form action="/deleteTask" method="POST" class="delete-form">
                 <input type="hidden" name="id" value="<%= task._id %>">
 
-                <button type="submit" class="delete-btn" onclick="return confirm('Delete this task?')">
-                Delete
+                <button type="submit" class="delete-btn">
+                    Delete
                 </button>
             </form>
             </div>
@@ -185,5 +183,28 @@
   </main>
 
   <script src="/theme.js"></script>
+
+  <script>
+  
+
+  document.querySelectorAll(".delete-form").forEach(form => {
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const shouldDelete = confirm("Delete this task?");
+
+      if (!shouldDelete) {
+        return;
+      }
+
+      const card = form.closest(".card");
+      card.classList.add("delete-animation");
+
+      setTimeout(() => {
+        form.submit();
+      }, 350);
+    });
+  });
+</script>
 </body>
 </html>
