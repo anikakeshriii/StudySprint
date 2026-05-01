@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 
+
 <body class="default">
 
   <div class="settings-menu">
@@ -262,6 +263,21 @@
   </main>
 
   <script src="/theme.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script>
+  const totalTasks = <%= tasks.length %>;
+  const completedTasks = <%= completedTasks.length %>;
+
+  if (totalTasks > 0 && totalTasks === completedTasks) {
+    confetti({
+      particleCount: 160,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+  }
+</script>
 
 </body>
 </html>
