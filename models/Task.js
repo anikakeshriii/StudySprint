@@ -6,7 +6,6 @@ const taskSchema = new mongoose.Schema({
   title: String,
   className: String,
   dueDate: String,
-  priority: String,
   estimatedHours: Number,
   completed: {
     type: Boolean,
