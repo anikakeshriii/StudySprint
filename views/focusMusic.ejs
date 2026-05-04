@@ -50,6 +50,15 @@
               <a href="<%= track.link %>" target="_blank">
                 Open on Spotify
               </a>
+
+              <% if (track.preview) { %>
+                <audio controls class="audio-preview">
+                  <source src="<%= track.preview %>" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              <% } else { %>
+                <p class="no-preview">No preview available</p>
+              <% } %>
             </div>
           <% }) %>
         </div>

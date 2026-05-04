@@ -19,8 +19,34 @@
       <label>Due Date</label>
       <input type="date" name="dueDate" required>
 
-      <label>Estimated Hours</label>
-      <input type="number" name="estimatedHours" required>
+      <label>Estimated Time</label>
+
+      <!-- ✅ UPDATED TIME INPUT -->
+      <div class="time-input-row">
+        <div class="time-input">
+          <input 
+            type="number" 
+            name="estimatedHours" 
+            min="0"
+            value="0"
+            required
+          >
+          <span>hr</span>
+        </div>
+
+        <div class="time-input">
+          <input 
+            type="number" 
+            name="estimatedMinutes" 
+            min="0"
+            value="0"
+            required
+          >
+          <span>min</span>
+        </div>
+      </div>
+
+      <p class="error-message" id="timeError"></p>
 
       <div class="button-group">
         <button type="submit">Save Task</button>
@@ -30,5 +56,58 @@
   </main>
 
   <script src="/theme.js"></script>
+
+  <script>
+    const form = document.querySelector("form");
+    const hoursInput = document.querySelector('input[name="estimatedHours"]');
+    const minutesInput = document.querySelector('input[name="estimatedMinutes"]');
+    const error = document.getElementById("timeError");
+
+    function normalizeMinutes() {
+      let hours = Number(hoursInput.value);
+      let minutes = Number(minutesInput.value);
+
+      if (minutes >= 60) {
+        hours += Math.floor(minutes / 60);
+        minutes = minutes % 60;
+
+        hoursInput.value = hours;
+        minutesInput.value = minutes;
+      }
+    }
+
+    // 🔥 auto-fix minutes while typing
+    minutesInput.addEventListener("input", normalizeMinutes);
+
+    // 🔥 optional UX polish (clear 0 on focus)
+    hoursInput.addEventListener("focus", () => {
+      if (hoursInput.value === "0") hoursInput.value = "";
+    });
+
+    minutesInput.addEventListener("focus", () => {
+      if (minutesInput.value === "0") minutesInput.value = "";
+    });
+
+    form.addEventListener("submit", function (e) {
+      normalizeMinutes();
+
+      const hours = Number(hoursInput.value);
+      const minutes = Number(minutesInput.value);
+
+      if (hours < 0 || minutes < 0) {
+        e.preventDefault();
+        error.textContent = "Time cannot be negative.";
+        return;
+      }
+
+      if (hours === 0 && minutes === 0) {
+        e.preventDefault();
+        error.textContent = "Please enter a valid time.";
+        return;
+      }
+
+      error.textContent = "";
+    });
+  </script>
 </body>
 </html>

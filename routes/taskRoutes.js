@@ -36,14 +36,15 @@ router.get("/addTask", (req, res) => {
 });
 
 router.post("/addTask", async (req, res) => {
-  const { title, className, dueDate, estimatedHours } = req.body;
+  const { title, className, dueDate, estimatedHours, estimatedMinutes } = req.body;
 
   await Task.create({
-    title,
-    className,
-    dueDate,
-    estimatedHours
-  });
+  title,
+  className,
+  dueDate,
+  estimatedHours: Number(estimatedHours),
+  estimatedMinutes: Number(estimatedMinutes)
+});
 
   res.redirect("/");
 });
@@ -119,11 +120,12 @@ router.post("/focusMusic", async (req, res) => {
     const data = await response.json();
 
     const tracks = data.tracks.items.map(track => ({
-      name: track.name,
-      artist: track.artists.map(artist => artist.name).join(", "),
-      image: track.album.images[0]?.url,
-      link: track.external_urls.spotify
-    }));
+        name: track.name,
+        artist: track.artists.map(artist => artist.name).join(", "),
+        image: track.album.images[0]?.url,
+        link: track.external_urls.spotify,
+        preview: track.preview_url
+     }));
 
     res.render("focusMusic", { tracks, searchTerm });
   } catch (error) {
@@ -152,7 +154,7 @@ router.get("/editTask/:id", async (req, res) => {
 
 router.post("/editTask/:id", async (req, res) => {
   try {
-    const { title, className, dueDate, estimatedHours } = req.body;
+    const { title, className, dueDate, estimatedHours, estimatedMinutes } = req.body;
 
     await Task.findByIdAndUpdate(req.params.id, {
       title,

@@ -62,7 +62,7 @@
         if (daysUntilDue === 0) dueTodayCount++;
         if (daysUntilDue >= 0 && daysUntilDue <= 7) dueThisWeekCount++;
 
-        totalHours += Number(task.estimatedHours) || 0;
+        totalHours += (Number(task.estimatedHours) || 0) + ((Number(task.estimatedMinutes) || 0) / 60);
 
         if (task.completed) completedCount++;
 
@@ -125,7 +125,7 @@
 
       <div class="dashboard-card">
         <span class="dashboard-icon">🧠</span>
-        <h3><%= totalHours %></h3>
+        <h3><%= totalHours.toFixed(1) %></h3>
         <p>Estimated Hours</p>
       </div>
 
@@ -189,7 +189,11 @@
 
           <p class="due-message"><strong><%= dueMessage %></strong></p>
 
-          <p><strong>Estimated Hours:</strong> <%= task.estimatedHours %></p>
+          <p>
+            <strong>Estimated Time:</strong>
+            <%= task.estimatedHours || 0 %> hr
+            <%= task.estimatedMinutes || 0 %> min
+          </p>
 
           <div class="task-actions">
             <form action="/toggleComplete" method="POST">
@@ -238,7 +242,11 @@
             }) %>
           </p>
 
-          <p><strong>Estimated Hours:</strong> <%= task.estimatedHours %></p>
+          <p>
+            <strong>Estimated Time:</strong>
+            <%= task.estimatedHours || 0 %> hr
+            <%= task.estimatedMinutes || 0 %> min
+          </p>
 
           <div class="task-actions">
             <form action="/toggleComplete" method="POST">

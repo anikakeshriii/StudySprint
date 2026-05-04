@@ -147,7 +147,7 @@ button {
   color: #1f2937;
   padding: 18px;
   border-radius: 14px;
-  border: 2px solid #4f46e5;
+  border: 1.5px solid #a5b4fc;
   box-shadow: 0 6px 18px rgba(0,0,0,.15);
 }
 
@@ -165,7 +165,7 @@ button {
   width: 100%;
   background: white;
   color: #111827;
-  border: 2px solid #4f46e5;
+  border: 1.5px solid #a5b4fc;
   border-radius: 10px;
   padding: 8px 12px;
 }
@@ -220,7 +220,7 @@ body.green #settingsBtn {
 
 body.green .dropdown,
 body.green .dropdown select {
-  border-color: #059669;
+  border-color: #86efac;
 }
 
 /* PINK */
@@ -250,7 +250,7 @@ body.pink #settingsBtn {
 
 body.pink .dropdown,
 body.pink .dropdown select {
-  border-color: #e11d48;
+  border-color: #fda4af;
 }
 
 /* BLUE */
@@ -280,7 +280,7 @@ body.blue #settingsBtn {
 
 body.blue .dropdown,
 body.blue .dropdown select {
-  border-color: #2563eb;
+  border-color: #93c5fd;
 }
 
 /* SUNSET */
@@ -310,7 +310,7 @@ body.sunset #settingsBtn {
 
 body.sunset .dropdown,
 body.sunset .dropdown select {
-  border-color: #ea580c;
+  border-color: #fdba74;
 }
 
 /* DARK */
@@ -893,6 +893,52 @@ body.dark .weekly-summary {
   background: #374151;
   border: 1px solid #c7d2fe;
 }
+
+.audio-preview {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.no-preview {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-top: 12px;
+}
+
+.time-input-row {
+  display: flex;
+  gap: 14px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.time-input {
+  position: relative;
+  flex: 1;
+}
+
+.time-input input {
+  width: 100%;
+  padding: 10px 42px 10px 12px;
+  box-sizing: border-box;
+}
+
+.time-input span {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 
 
 
