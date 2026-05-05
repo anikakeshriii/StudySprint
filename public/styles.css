@@ -939,6 +939,28 @@ body.dark .weekly-summary {
   margin-top: 5px;
 }
 
+/* TASK SEARCH + FILTER */
+
+.task-controls {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.task-controls input {
+  flex: 2;
+}
+
+.task-controls select {
+  flex: 1;
+}
+
+@media (max-width: 700px) {
+  .task-controls {
+    flex-direction: column;
+  }
+}
+
 
 
 

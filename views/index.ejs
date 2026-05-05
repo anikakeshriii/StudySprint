@@ -150,6 +150,22 @@
       <% } %>
     </div>
 
+    <div class="task-controls">
+  <input 
+    type="text" 
+    id="taskSearch" 
+    placeholder="Search tasks by title or class..."
+  >
+
+  <select id="taskFilter">
+    <option value="all">All Tasks</option>
+    <option value="today">Due Today</option>
+    <option value="week">Due This Week</option>
+    <option value="overdue">Overdue</option>
+    <option value="completed">Completed</option>
+  </select>
+</div>
+
     <h2>Upcoming Tasks</h2>
 
     <% if (activeTasks.length === 0) { %>
@@ -165,7 +181,12 @@
           const dueMessage = info.dueMessage;
         %>
 
-        <div class="card">
+        <div 
+            class="card task-card"
+            data-title="<%= task.title.toLowerCase() %>"
+            data-class="<%= task.className.toLowerCase() %>"
+            data-status="<%= diffDays < 0 ? 'overdue' : diffDays === 0 ? 'today' : diffDays <= 7 ? 'week' : 'future' %>"
+        >
 
           <% if (diffDays < 0) { %>
             <span class="badge due-overdue">❌ Overdue</span>
@@ -228,7 +249,12 @@
           const due = info.due;
         %>
 
-        <div class="card completed-task">
+        <div 
+            class="card completed-task task-card"
+            data-title="<%= task.title.toLowerCase() %>"
+            data-class="<%= task.className.toLowerCase() %>"
+            data-status="completed"
+        >
 
           <h3><%= task.title %></h3>
 
@@ -285,6 +311,39 @@
       origin: { y: 0.6 }
     });
   }
+</script>
+
+<script>
+  const taskSearch = document.getElementById("taskSearch");
+  const taskFilter = document.getElementById("taskFilter");
+
+  function filterTasks() {
+    const searchValue = taskSearch.value.toLowerCase();
+    const filterValue = taskFilter.value;
+
+    document.querySelectorAll(".task-card").forEach(card => {
+      const title = card.dataset.title;
+      const className = card.dataset.class;
+      const status = card.dataset.status;
+
+      const matchesSearch =
+        title.includes(searchValue) || className.includes(searchValue);
+
+      const matchesFilter =
+        filterValue === "all" ||
+        status === filterValue ||
+        (filterValue === "week" && (status === "today" || status === "week"));
+
+      if (matchesSearch && matchesFilter) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  taskSearch.addEventListener("input", filterTasks);
+  taskFilter.addEventListener("change", filterTasks);
 </script>
 
 </body>
